@@ -1,0 +1,127 @@
+body {
+   
+    
+    font-family: 'Ubuntu', Monospace;
+    background-repeat: no-repeat;
+    background-attachment:scroll;
+    width:100%;
+    /* animation: change 10s; */
+    
+  
+}
+.main {
+    background-color:white;
+    width: 500px;
+    height: 500px;
+    margin: 7em auto;
+    transition:.10s;
+    box-shadow: 15px 5px 8px grey, 10px 10px 8px black;
+}
+
+
+.sign {
+    padding-top: 40px;
+    color:black;
+    
+    font-family : 'cursive';
+    font-weight: bold;
+    font-size: 32px;
+}
+
+  .button1 {
+    border-radius: 4px;
+    background-color: black;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 200px;
+    cursor: pointer;
+    margin-bottom: 50px;
+    margin-left: 130px;
+    text-align: center;
+    margin-bottom: 27px;
+    
+    
+  }
+  .button1 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button1 span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button1:hover span {
+    padding-right: 25px;
+  }
+  
+  .button1:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+.em,.pass,.un,.ph {
+    width: 76%;
+color: rgb(38, 50, 56);
+font-weight: 700;
+font-size: 14px;
+letter-spacing: 1px;
+background: rgba(136, 126, 126, 0.04);
+padding: 10px 20px;
+border: none;
+border-radius: 20px;
+outline: none;
+box-sizing: border-box;
+border: 2px solid rgba(0, 0, 0, 0.02);
+margin-bottom: 50px;
+margin-left: 46px;
+text-align: center;
+margin-bottom: 27px;
+font-family: 'ink pen';
+}
+.em:hover,.pass:hover,.un.hover,.ph:hover{
+  background-color: #E0B0FF;
+  color: white;
+  width: 370px;
+  height: 44px;
+}
+.em:focus, .pass:focus,.un:focus,.ph:focus{
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+    border-color: black;
+    box-shadow: 0 0 8px 0 #ff7675;
+    
+  }
