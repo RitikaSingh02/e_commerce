@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
-from .models import users
+from .models import users,products
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -45,8 +45,7 @@ def email_verify(request):
        
         return JsonResponse("RMNBJH",safe=False)
 
-def sessions(request):
-    if request.method=="POST":
-        data=json.loads(request.body)
-        request.session["email"] = data['email']
-        return JsonResponse(request.session["email"],safe=False)
+def product_details(request):
+    if request.method=="GET":
+        product=products.objects.filter(status="available").values()
+        return JsonResponse(list(product),safe=False)

@@ -1,6 +1,6 @@
 body {
    
-    
+  
     font-family: 'Ubuntu', Monospace;
     background-repeat: no-repeat;
     background-attachment:scroll;
@@ -94,34 +94,51 @@ body {
     right: 0;
   }
 
-.em,.pass,.un,.ph {
+.em,.pass,.un,.ph,.ifsc {
     width: 76%;
-color: rgb(38, 50, 56);
-font-weight: 700;
-font-size: 14px;
-letter-spacing: 1px;
-background: rgba(136, 126, 126, 0.04);
-padding: 10px 20px;
-border: none;
-border-radius: 20px;
-outline: none;
-box-sizing: border-box;
-border: 2px solid rgba(0, 0, 0, 0.02);
-margin-bottom: 50px;
-margin-left: 46px;
-text-align: center;
-margin-bottom: 27px;
-font-family: 'ink pen';
-}
-.em:hover,.pass:hover,.un.hover,.ph:hover{
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'ink pen';
+  }
+.em:hover,.pass:hover,.un.hover,.ph:hover,.ifsc:hover{
   background-color: #E0B0FF;
   color: white;
   width: 370px;
   height: 44px;
 }
-.em:focus, .pass:focus,.un:focus,.ph:focus{
+.em:focus, .pass:focus,.un:focus,.ph:focus,.ifsc:focus{
     border: 2px solid rgba(0, 0, 0, 0.18) !important;
     border-color: black;
     box-shadow: 0 0 8px 0 #ff7675;
     
   }
+  .footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    height:60px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+i{
+  size: 150px;
+}
+.incorrect{
+  margin-left: 60px;
+  color:red;
+}

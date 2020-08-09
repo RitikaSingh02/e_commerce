@@ -1,15 +1,15 @@
 angular.module("payment",[]).controller("payment_ctrl",function($scope,$http){
-
+    $scope.errorMessage = false;
     $scope.subFunction=function(){
         
         var url="https://ifsc.razorpay.com/"+$scope.ifsc
         $http.get(url).then(function(response){
             
             if(response.data ){
-                alert("correct ifsc");
+                pass
             }     
         },function(response){
-            alert("wrong ifsc");
+            $scope.errorMessage = "invalid ifsc";
         });
     }
 })

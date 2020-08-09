@@ -14,8 +14,8 @@
   	
         <p class="sign" align="center"><b>BUY</b> </p><br><br>
         
-          <input class="ifsc" type="text" align="center" ng-model="ifsc" placeholder="IFSC CODE" required/>
-          
+          <input class="ifsc" type="text" align="center" ng-model="ifsc" placeholder="BANK IFSC" required/>
+          <div ng-if="errorMessage"><p class="incorrect">*{{ errorMessage }}</div>
           
           <button class ="button1"  ng-click="subFunction()"><span>Login</span></button> 
                     

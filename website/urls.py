@@ -6,7 +6,8 @@ urlpatterns=[
 
    url(r'^paytm/$',views.paytm,name="paytm"),
    url(r'^email/$',views.email,name="email"), 
+   url(r'^product_details/$',views.product_details,name="verify_email"),
    url(r'^payment/$',views.payment,name="payment"), 
    url(r'^email_verify/$',views.email_verify,name="verify_email"),
-   url(r'^sessions/$',views.sessions,name="verify_email"),
+
 ]
