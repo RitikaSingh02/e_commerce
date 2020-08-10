@@ -5,7 +5,7 @@ from .models import users,products
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-
+from django.contrib.gis.utils import GeoIP
 
 
 def paytm(request):
@@ -49,3 +49,14 @@ def product_details(request):
     if request.method=="GET":
         product=products.objects.filter(status="available").values()
         return JsonResponse(list(product),safe=False)
+
+def location(request):
+    g = GeoIP()
+    ip = request.META.get('REMOTE_ADDR', None)
+    if ip:
+        city = g.city(ip)['city']
+    else:
+        city = 'Rome' # default city
+    return JsonResponse(city,safe=False)
+
+# proceed with city
