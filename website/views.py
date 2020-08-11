@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
-from .models import users,products
+from .models import users,products,otp_table
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
-from django.contrib.gis.utils import GeoIP
+
 
 
 def paytm(request):
@@ -19,8 +19,8 @@ def payment(request):
 def email(request):
     if request.method=="POST":
         data=json.loads(request.body)
-        email=data['email']
-        recipient={"emails":email}
+        emails=data['email']
+        recipient={"emails":emails}
 
         # msg_html = render_to_string('website/mail.html', recipient)
         # send_mail(
@@ -35,7 +35,7 @@ def email(request):
         html_body = render_to_string("website/mail.html",recipient)
 
         msg = EmailMultiAlternatives(subject="AMAZING", from_email="ritikasingh001001@gmail.com",
-                             to=[email], body="django email")
+                             to=[emails], body="django email")
         msg.attach_alternative(html_body, "text/html")
         msg.send()
         return JsonResponse("email rendered",safe=False)
@@ -50,13 +50,26 @@ def product_details(request):
         product=products.objects.filter(status="available").values()
         return JsonResponse(list(product),safe=False)
 
-def location(request):
-    g = GeoIP()
-    ip = request.META.get('REMOTE_ADDR', None)
-    if ip:
-        city = g.city(ip)['city']
-    else:
-        city = 'Rome' # default city
-    return JsonResponse(city,safe=False)
+def otp_save(request):
+    if request.method=="POST":
+        data=json.loads(request.body)
+        phone=data['phone']
+        otp=data['otp']
+        customer=otp_table.objects.create(
+            phone=phone,
+            otp=otp
+        )
+        return JsonResponse("otp saved success",safe=False)
 
+def otp_verify(request):
+    if request.method=="POST":
+        data=json.loads(request.body)
+        otp=data['otp']
+        phone=data['phone']
+        customer=otp_table.objects.filter(otp=otp,phone=phone,status="active").values()
+        if(customer):
+            customer=otp_table.objects.filter(otp=otp,phone=phone,status="active").update(status="inactive")
+            return JsonResponse("correct",safe=False)
+        else:
+            return JsonResponse("wrong",safe=False)
 # proceed with city
