@@ -48,15 +48,3 @@ def logout(request):
         pass
     return JsonResponse("logout successfull",safe=False)
 
-
-
-
-# def access_session(request):
-    
-#     if request.session.get('email'):
-#         return JsonResponse(request.session.get('password'),safe=False)
-  
-
-    
-
-# Create your views here.

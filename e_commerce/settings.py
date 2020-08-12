@@ -131,18 +131,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 
-STATIC_URL = '/staticfiles/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'staticfiles')
-]
-MEDIA_URL='/images/'
-CORS_ORIGIN_ALLOW_ALL = True
 
 PAYTM_MERCHANT_ID ='IjxnIp43584314770202'
 PAYTM_SECRET_KEY = 'xviIzrLqoC%eSmQK'
 PAYTM_WEBSITE = 'WEBSTAGING'
 PAYTM_CHANNEL_ID = 'WEB'
 PAYTM_INDUSTRY_TYPE_ID = 'Retail'
+PAYTM_PAYMENT_GATEWAY_URL = "https://securegw-stage.paytm.in/order/process"
+PAYTM_TRANSACTION_STATUS_URL = "https://securegw-stage.paytm.in/order/status"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
