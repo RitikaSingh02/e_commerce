@@ -1,5 +1,7 @@
+from django.shortcuts import render
 from django.http import JsonResponse
 import json
+from website.models import verified_emails
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -11,7 +13,7 @@ def email(request):
         emails=data['email']
         recipient={"emails":emails}
 
-        msg_html = render_to_string('website/mail.html', recipient)
+        msg_html = render_to_string('email/mail.html', recipient)
         send_mail(
         'AMAZING',
         'django mail',
@@ -19,6 +21,24 @@ def email(request):
         [emails],
         html_message=msg_html,
         fail_silently=False,#when set to false there will be a smtplib.SMTPException. These are the required fields and can not be empty.
-        )   
+        ) 
+
+        verified_emails.objects.create(
+            email=data['email']
+        )  
         return JsonResponse("email rendered",safe=False)
 
+def email_verify(request,emails):
+    if request.method=="GET":
+        verified_emails.objects.filter(email=emails).update(status="verified")
+        return render(request,'email/verified.html',{"email":emails})
+
+def email_status(request):
+    if request.method=="POST":
+        data=json.loads(request.body)
+        email=data['email']
+        status=verified_emails.objects.filter(status="rendered").values()
+        if(status):
+            return JsonResponse("rendered",safe=False)
+        else:
+            return JsonResponse("verified",safe=False)

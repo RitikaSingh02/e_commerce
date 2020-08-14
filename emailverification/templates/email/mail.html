@@ -2,8 +2,7 @@
 <html>
     <head>
         {% load static %}
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
 
         <style>
             body {  
@@ -49,26 +48,14 @@
         </head>
 <body>
     
-<div ng-app="email" ng-controller="email_ctrl">
+
     <H1>VERIFY YOUR EMAIL {{emails}}</H1>
 
     <p class="sign"> click the button below to verify your email</p>
-    <button ng-click="subFunction()">VERIFY</button>
-</div>
+    <a href="http://127.0.0.1:8000/amazing/email/email_verify/{{emails}}/"><button>VERIFY</button></a>
+
   
-<script>
-    angular.module("email",[]).controller("email_ctrl",function($scope,$http){
 
-$scope.subFunction=function(){
-
-
-$http.get('http://127.0.0.1:8000/amazing/email_verify/').then(function (response) {
-if(response.data)
-console.log("done")
-});
-}
-})
-    </script>
 </body>
 
 </html> 

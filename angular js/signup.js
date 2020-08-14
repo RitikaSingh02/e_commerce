@@ -14,7 +14,7 @@ angular.module("user_signup",[]).controller("user_signup_ctrl",function($scope,$
                     sessionStorage.setItem("otp",value);
                     sessionStorage.setItem("phone",$scope.phone);
                     var data={"otp":value,"phone":$scope.phone}
-                         $http.post("http://127.0.0.1:8000/amazing/otp_save/",JSON.stringify(data)).then(function(response){
+                         $http.post("http://127.0.0.1:8000/amazing/user/otp/otp_save/",JSON.stringify(data)).then(function(response){
                              if(response.data)
                              console.log("otp saved");
                              window.location.href="otp.html";
@@ -39,15 +39,27 @@ angular.module("user_signup",[]).controller("user_signup_ctrl",function($scope,$
     });
     }
 
-    // $scope.subFunction=function(){
-    //     console.log($scope.email);
-    //     var data={'email':$scope.email}
-    //     $http.post('http://127.0.0.1:8000/amazing/email/',JSON.stringify(data)).then(function (response) {
-    //         if(response.data){
-    //             alert(response.data)
-    //         }
+    $scope.subFunction2=function(){
+        console.log($scope.email);
+        var data={'email':$scope.email}
+        $http.post('http://127.0.0.1:8000/amazing/email/email_render/',JSON.stringify(data)).then(function (response) {
+            if(response.data){
+                alert(response.data)
+            }
             
-    // });
-    // }
+    });
+    }
+
+    $scope.email_rendered=function(){
+        data={"email":$scope.email}
+        $http.post('http://127.0.0.1:8000/amazing/email/email_status/',JSON.stringify(data)).then(function (response) {
+            if(response.data=="rendered")
+                return true
+            else
+            return false
+            
+            
+    });
+    }
 
 })

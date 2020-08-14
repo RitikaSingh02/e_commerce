@@ -149,6 +149,7 @@ PAYTM_CHANNEL_ID = 'WEB'
 PAYTM_INDUSTRY_TYPE_ID = 'Retail'
 PAYTM_PAYMENT_GATEWAY_URL = "https://securegw-stage.paytm.in/order/process"
 PAYTM_TRANSACTION_STATUS_URL = "https://securegw-stage.paytm.in/order/status"
+# PAYTM_CALLBACK_URL=""
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

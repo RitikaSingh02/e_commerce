@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^amazing/', include('website.urls')),
     url(r'^amazing/user/', include('customer.urls')),
     url(r'^amazing/user/otp/', include('otpverification.urls')),
-    url(r'^amazing/user/email/', include('otpverification.urls')),
+    url(r'^amazing/email/', include('emailverification.urls')),
     url(r'^amazing/user/payment/', include('paymentgateway.urls')),
     
 ]
