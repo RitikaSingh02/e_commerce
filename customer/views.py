@@ -13,7 +13,7 @@ def login(request):
         if(user):
             request.session["email"] = data['email']
             request.session['password'] =data['password']
-            return JsonResponse(list(user),safe=False)
+            return JsonResponse(request.session["email"],safe=False)
 
         else:
             return JsonResponse("wrong",safe=False)

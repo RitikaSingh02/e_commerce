@@ -1,0 +1,13 @@
+<h1>DO NOT RERESH THE PAGE</h1>
+<body>
+<form action="https://securegw-stage.paytm.in/order/status" method="POST" name="paytm">
+    {%for key,val in context%}
+    {{key}}
+    {{val}}
+    {%endfor%}
+
+</form>
+<script>
+    document.paytm.submit()
+</script>
+</body>

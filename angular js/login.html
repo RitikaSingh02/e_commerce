@@ -7,13 +7,14 @@
         <!-- <script src="https://kit.fontawesome.com/e74fa06b39.js" crossorigin="anonymous"></script> -->
         <link href="login.css" rel="stylesheet" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-cookies.js"></script>
+        <script src="index.js"></script>
     </head>
 <body>
-    <div class="main" ng-app="user_login" ng-controller="user_login_ctrl">
+    <div class="main" ng-app="user_login_cookie" ng-controller="user_login_ctrl_cookie">
   	
         <p class="sign" align="center"><b>LOGIN</b> </p><br><br>
-        
+            {{mycookieval}}
           <input class="em" type="text" align="center" ng-model="email" placeholder="Email" required/>
           <input class="pass" type="password" align="center" ng-model="password" placeholder="Password" required/><br><br>
           

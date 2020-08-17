@@ -16,16 +16,18 @@ angular.module("payment",[]).controller("payment_ctrl",function($scope,$http){
                     return result;
                  }
                  
-                 console.log(makeid(5));
-                data={"order_id":makeid(5)}
+                
+                data={"order_id":makeid(5),"email":$scope.em,"amount":$scope.amt}
 
-                $http.post('http://127.0.0.1:8000/amazing/user/paymentgateway/paytm/', JSON.stringify(data)).then(function (response) {
+                $http.post('http://127.0.0.1:8000/payment/payment1/', JSON.stringify(data)).then(function (response) {
                     if(response.data){
                         url = "https://securegw-stage.paytm.in/order/status";
                         $http.post(url, JSON.stringify(response.data)).then(function (response){
-                                console.log("yes");
+                                console.log(response.data);
                         })
+                       
                     }
+
                 
                 
         });
@@ -96,6 +98,7 @@ $scope.checked_pin=function(){
     else
     return true
 }
+
 }
 );
 
