@@ -14,20 +14,14 @@ class products(models.Model):
     product_img=models.CharField(max_length=200,default="NULL")
     status=models.CharField(max_length=200,default="available")
 
-class payment(models.Model):
-    user=models.ForeignKey(users,null=True,on_delete=models.SET_NULL)
-    product=models.ForeignKey(products,null=True,on_delete=models.SET_NULL)
-    date_of_purchase=models.DateField(auto_now_add=True,auto_now=False)
-
 class orders(models.Model):
-    item_json=models.CharField(max_length=200,default="NULL")
-    name=models.CharField(max_length=10,default="NULL",unique=True)
-    email=models.EmailField(max_length=200,default="NULL",unique=True)
-    address=models.CharField(max_length=200,default="NULL",unique=True)
-    pin=models.CharField(max_length=20,default="NULL",unique=True)
-    phone=models.CharField(max_length=10,default="NULL",unique=True)
-    product=models.ForeignKey(products,null=True,on_delete=models.SET_NULL)
-    user=models.ForeignKey(users,null=True,on_delete=models.SET_NULL)
+    cust=models.ForeignKey(users,null=True,on_delete=models.SET_NULL)
+    order_id=models.CharField(max_length=200,default="NULL")
+    cust_mail=models.CharField(max_length=200,default="NULL")
+    checksum=models.CharField(max_length=250,default="NULL")
+    trans_id=models.CharField(max_length=250,default="NULL")
+    product_id=models.CharField(max_length=250,default="NULL")
+    status=models.CharField(max_length=250,default="pending")
     
 class otp_table(models.Model):
     

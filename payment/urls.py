@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns=[
 
-   url(r'^payment1/$',views.paytm,name="otp_save"),
-#    url(r'^otp_verify/$',views.otp_verify,name="otp_verify"),
+   url(r'^payment1/$',views.paytm,name="payment"),
+    url(r'^process/$',views.process_transaction,name="process"),
+
 
 ]

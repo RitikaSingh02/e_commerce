@@ -1,8 +1,5 @@
 angular.module("user_signup",[]).controller("user_signup_ctrl",function($scope,$http){
-    function otp(){
-        sessionStorage.setItem("otp",true);
-        return sessionStorage.getItem("otp");
-    }
+  
     $scope.subFunction1=function(){
             var value=Math.floor(Math.random() * 10000-1+1)+1;
             url="https://www.fast2sms.com/dev/bulk?authorization=d7tJOo1Ea6cUlymPGjwbBAFMqsxHgfpSkN8uXTQRIV3KriC5hZHDLX1xlJA527qMcQYt98fzENW0VjuF&sender_id=FSTSMS&language=english&route=qt&numbers=6386845062&message=33677&variables={AA}&variables_values="+value.toString();

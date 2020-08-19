@@ -1,53 +1,75 @@
 from django.http import JsonResponse
 import json
 from django.shortcuts import render
+import requests
+from paytmchecksum import PaytmChecksum
+from website.models import orders
 
 def paytm(request):
-    # More Details: https://developer.paytm.com/docs/checksum/#python
     if request.method=="POST":
-
         data=json.loads(request.body)
-
-        import requests
-        
-
-        from paytmchecksum import PaytmChecksum
-
-        # Generate Checksum via Hash/Array
-        # initialize an Hash/Array
-        paytmParams = {}
-
-        paytmParams["MID"] = "IjxnIp43584314770202"
-        paytmParams["ORDERID"] = data["order_id"]
-
-        # Generate checksum by parameters we have
-        # Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
-        paytmChecksum = PaytmChecksum.generateSignature(paytmParams, "xviIzrLqoC%eSmQK")
-        verifyChecksum = PaytmChecksum.verifySignature(paytmParams, "xviIzrLqoC%eSmQK",paytmChecksum)
-
-        print("generateSignature Returns:" + str(paytmChecksum))
-        print("verifySignature Returns:" + str(verifyChecksum))
-
-        # Generate Checksum via String
-        # initialize JSON String
-        
-        # body = "{\"mid\":\"IjxnIp43584314770202\",\"orderId\":\"123\"}"
-        body="{\"mid\":\"IjxnIp43584314770202\",\"orderId\":"+data['order_id']+"\"}"
-
-        # Generate checksum by parameters we have
-        # Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
-        paytmChecksum = PaytmChecksum.generateSignature(body, "xviIzrLqoC%eSmQK")
-        verifyChecksum = PaytmChecksum.verifySignature(body, "xviIzrLqoC%eSmQK", paytmChecksum)
-
-        print("generateSignature Returns:" + str(paytmChecksum))
-        print("verifySignature Returns:" + str(verifyChecksum))
-
-        context={
-            "mid":"IjxnIp43584314770202",
-            "orderid":data['order_id'],
-            "email":data['email'],
-            "amount":data['amount']
-
+        paytmParams = dict()
+        paytmParams["body"] = {
+            "requestType"   : "Payment",
+            "mid"           : "IjxnIp43584314770202",
+            "websiteName"   : "WEBSTAGING",
+            "orderId"       : data['order_id'],
+            "callbackUrl"   : "https://merchant.com/callback",
+            "txnAmount"     : {
+                "value"     : "1.00",
+                "currency"  : "INR",
+            },
+            "userInfo"      : {
+                "custId"    : data['email'],
+            },
         }
 
-        return JsonResponse(context,safe=False)
+        checksum = PaytmChecksum.generateSignature(json.dumps(paytmParams["body"]), "xviIzrLqoC%eSmQK")
+        orders.objects.create(
+
+                order_id=data['order_id'],
+                cust_mail=data['email'],
+                checksum=str(checksum),
+                cust_id=data['cust_id'],
+                product_id=data['product_id']
+        )
+        paytmParams["head"] = {
+            "signature"	: checksum
+        }
+
+        post_data = json.dumps(paytmParams)
+
+        url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid=IjxnIp43584314770202&orderId="+data['order_id']
+        response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
+        print(response)
+        print(data['order_id'])
+
+        return JsonResponse(response,safe=False)
+
+def process_transaction(request):
+    if request.method=="POST":
+        data=json.loads(request.body)
+        tran_id=data['tran_id']
+        order_id=data['order_id']
+
+        paytmParams = dict()
+
+        paytmParams["body"] = {
+            "requestType" : "NATIVE",
+            "mid"         : "IjxnIp43584314770202",
+            "orderId"     : data['order_id'],
+            "paymentMode" : "CREDIT_CARD",
+            "cardInfo"    : "|4111111111111111|111|122032",
+            "authMode"    : "otp",
+        }
+
+        paytmParams["head"] = {
+            "txnToken"    : tran_id
+        }
+
+        post_data = json.dumps(paytmParams)
+        url = "https://securegw-stage.paytm.in/theia/api/v1/processTransaction?mid=IjxnIp43584314770202&orderId="+data['order_id']
+        response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
+        print(response)        
+        return JsonResponse(response,safe=False)                 
+        

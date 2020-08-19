@@ -4,6 +4,7 @@ angular.module("user_login_cookie",['ngCookies']).controller("user_login_ctrl_co
         
         console.log($scope.email);
         sessionStorage.setItem("mail",$scope.email);
+        
       
             $cookies.put('cookie',sessionStorage.getItem('mail'));
 
@@ -16,9 +17,8 @@ angular.module("user_login_cookie",['ngCookies']).controller("user_login_ctrl_co
             if(response.data=="wrong")
             alert("wrong credentials");
             else{
-
-            window.open("website.html",
-            "_blank");
+            sessionStorage.setItem("cust_id",response.data['id']);
+            window.location.href="website.html";
             }
     });
     }
