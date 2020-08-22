@@ -1,7 +1,7 @@
 angular.module("payment",[]).controller("payment_ctrl",function($scope,$http){
     $scope.errorMessage = false;
     $scope.subFunction=function(){
-       
+       var order;
         var url="https://ifsc.razorpay.com/"+$scope.ifsc
         $http.get(url).then(function(response){
             
@@ -16,22 +16,18 @@ angular.module("payment",[]).controller("payment_ctrl",function($scope,$http){
                     return result;
                  }
                  
-                order=makeid(5)
+                order1=makeid(5)
+                order=order1;
                 current_url=window.location.href;
-                product_id=current_url.split('=')[1];
+                product_id=current_url.split('=').split('?')[0];
+                console.log(product_id)
+                $scope.amt=current_url.split('?')[2].split('=')[1];
                 data={"order_id":order,"email":$scope.em,"amount":$scope.amt,"cust_id":sessionStorage.getItem('cust_id'),"product_id":product_id}
 
                 $http.post('http://127.0.0.1:8000/payment/payment1/', JSON.stringify(data)).then(function (response) {
                     if(response.data){
-                      
-                       sessionStorage.setItem('orderid',order);
-                       sessionStorage.setItem('tran_id',response.data["body"]["txnToken"]);
-                    //    console.log(sessionStorage.getItem('tran_id'));
-                       window.location.href="payment.html";
-
-                
-                
-        }});
+                       window.location.href='http://127.0.0.1:8000/payment/payload/'+order1+'/'
+                    }});
     }
 },function(){
     $scope.errorMessage = "invalid ifsc";

@@ -52,7 +52,8 @@
         <div class="card-body" align="center">
           <h5 class="card-title" >{{x.product_name}}</h5>
           <p class="card-text">{{x.description}}</p>
-          <a href="payment_form.html?id={{x.id}}" class="btn btn-warning">BUY</a>
+          <p class="card-text">Rs.{{x.price}}</p>
+          <a href="payment_form.html?id={{x.id}}?amt={{x.price}}" class="btn btn-warning">BUY</a>
         </div>
       </div>
       </div>
