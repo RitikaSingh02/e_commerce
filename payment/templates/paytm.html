@@ -6,10 +6,10 @@
       <center>
          <h1>Please do not refresh this page...</h1>
       </center>
-      <form method="post" action="https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid=IjxnIp43584314770202&orderId={{orderId}}" name="paytm">
+      <form method="post" action="https://securegw-stage.paytm.in/theia/api/v1/showPaymentPage?mid={{mid}}&orderId={{orderId}}" name="paytm">
          <table border="1">
             <tbody>
-               <input type="hidden" name="mid" value="IjxnIp43584314770202">
+               <input type="hidden" name="mid" value="{{mid}}">
                <input type="hidden" name="orderId" value="{{orderId}}">
                <input type="hidden" name="txnToken" value="{{tranId}}">
             </tbody>
