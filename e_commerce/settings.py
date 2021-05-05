@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -140,12 +141,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 
-STATIC_URL = '/staticfiles/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles')
-]
 MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 PAYTM_MERCHANT_ID = 'mqqZKa75117410930564'
@@ -164,3 +165,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'django123001@gmail.com'
 EMAIL_HOST_PASSWORD = "django@123"
+
+SITE_ID = 2
