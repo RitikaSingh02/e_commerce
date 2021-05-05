@@ -3,11 +3,12 @@
 <head>
     <title>AMAZING</title>
 
-    <link rel='icon' type='jpg' href='angular js/images/icons.jpg'>
+    <link rel='icon' type='jpg' href='./images/icons.jpg'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- <script src="https://kit.fontawesome.com/e74fa06b39.js" crossorigin="anonymous"></script> -->
-    <link href="login.css" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link href="signup.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.js"></script>
     <script src="signup.js"></script>
 </head>
 
@@ -23,11 +24,12 @@
 
         <input class="pass" type="password" align="center" ng-model="password" placeholder="Password"
             required /><br><br>
-
-        <button class="button1" ng-click="subFunction1()"><span>OTP VERIFICATION</span></button>
-        <button class="button1" ng-click="subFunction2()"><span>EMAIL VERIFICATION</span></button>
+        <!-- <i class="fas fa-envelope-open"></i> -->
+        <button class="button1" ng-click="subFunction1()"><span>OTP VERIFY</span></button>
+        <button class="button1" ng-click="subFunction2()"><span>EMAIL VERIFY</span></button>
+        <!-- <i class="fas fa-envelope-open"></i> -->
+        <br>
         <button class="button1" ng-click="subFunction()"><span>SIGNUP</span></button>
-
     </div>
 </body>
 

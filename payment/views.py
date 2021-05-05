@@ -3,7 +3,8 @@ import json
 from django.shortcuts import render
 import requests
 from paytmchecksum import PaytmChecksum
-from website.models import orders, users
+from website.models import orders
+from customer.models import CustomUser
 import urllib.parse
 from e_commerce.settings import PAYTM_MERCHANT_ID, PAYTM_SECRET_KEY, PAYTM_CALLBACK
 
@@ -39,7 +40,7 @@ def paytm(request):
             order_id=data['order_id'],
             cust_mail=data['email'],
             checksum=str(checksum),
-            cust_id=users.objects.filter(
+            cust_id=CustomUser.objects.filter(
                 email=data['email']).values_list('id', flat=True)[0],
             product_id=data['product_id']
         )

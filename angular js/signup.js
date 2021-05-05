@@ -1,4 +1,4 @@
-angular.module("user_signup",[]).controller("user_signup_ctrl",function($scope,$http){
+angular.module("user_signup",['ngCookies']).controller("user_signup_ctrl",function($scope,$http,$cookies){
   
     $scope.subFunction1=function(){
             var value=Math.floor(Math.random() * 10000-1+1)+1;
@@ -24,13 +24,20 @@ angular.module("user_signup",[]).controller("user_signup_ctrl",function($scope,$
                     )
                                     
                 }
-                
+      
+
     $scope.subFunction=function(){
         console.log($scope.email);
-        var data={"username":$scope.username,"email":$scope.email,"phone":$scope.phone,"password":$scope.password}
-        $http.post('http://127.0.0.1:8000/amazing/user/signup/', JSON.stringify(data)).then(function (response) {
+        var data={"username":$scope.username,"email":$scope.email,"phone":$scope.phone,"password":$scope.password }
+        $http.post('http://127.0.0.1:8000/amazing/user/login/', JSON.stringify(data)).then(function (response) {
             if(response.data){
-                alert("signup")
+                console.log(response.data)
+                SetCookies = function (cookie) {
+                    $cookies.put("sessionid",cookie);
+                };   
+                console.log(response.data.sessionid)
+                SetCookies(response.data.sessionid);
+                alert(response.data.msg)
             }
             
     });
