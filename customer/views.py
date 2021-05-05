@@ -42,16 +42,17 @@ def my_login(request):
         else:
             # print(request.META)
 
-            # user = authenticate(username=username, password=password)
-            uname = data['username']
+            user = authenticate(email=email, password=password)
+            # print(user)
+            email = data['email']
             password = data['password']
 
-            user = User.objects.get(username=uname)
-            print(user)
+            user = User.objects.get(email=email)
+            # print(user)
             if user.is_active:
 
                 user = authenticate(
-                    request, username=uname, password=password)
+                    request, username=user, password=password)
                 # print(user)
                 # print(request.META)
                 # print(user.is_authenticated)
@@ -63,18 +64,18 @@ def my_login(request):
                 # so as soon this happens everything is stored in the django_sessions and now after u are login ans u print the META of your req
                 # then it will have in what session you are logged in to django
 
-                request.session['username'] = uname
+                request.session['username'] = user
                 request.session['email'] = email
                 # HTTP_COOKIE HEADER IS TOO DESTROYED as it was created only after the login is successfull
                 # print(request.META['HTTP_COOKIE'].split('=')[1])
                 sessiond = "gad13h48r5c12659myvq3ok5twrgi49q"
 
-            user = CustomUser.objects.filter(email__contains=email, password__contains=password).filter(
-                email=email, password=password).values()
-
-            res = {"user": list(user), "sessionid": sessiond,
+            user = list(CustomUser.objects.filter(email__contains=email, password__contains=password).filter(
+                email=email, password=password).values_list('id', flat=True))
+            # print(list(user))
+            res = {"user": user, "sessionid": sessiond,
                    "msg": "YOU HAVE ALREADY SIGNED UP KINDLY PROCEED TO LOGIN"}
-            return JsonResponse(res, safe=False)
+            return JsonResponse({"id": user[0]}, safe=False)
 
 
 def my_logout(request):
