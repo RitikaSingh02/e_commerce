@@ -1,0 +1,17 @@
+{% load socialaccount %}
+{%load static %}
+<html>
+    <head>
+        <link rel = "stylesheet" href="{% static "index.css"%}">
+        </head>
+
+<body>
+<h1>WHAT YOU HAD IN YOUR LUNCH ? </h1>
+{% if user.is_authenticated %}
+  <p>Welcome, You are logged in as {{ user.username }}</p>
+{% else %}
+
+  <a href="{% provider_login_url 'google' %}">Login With Google</a>
+{% endif %}
+</body>
+</html>
